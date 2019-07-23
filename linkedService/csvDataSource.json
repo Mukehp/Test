@@ -1,0 +1,13 @@
+{
+	"name": "csvDataSource",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "\\\\dfastorage.file.core.windows.net\\bitlegencefile",
+			"userId": "dfastorage",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRGQklUTEVHRU5DRV81YjFiZDE4My03ZDQ1LTQ0YTUtYjQwYy01MmVkYzk3M2U0ZGMiDQp9"
+		}
+	}
+}
