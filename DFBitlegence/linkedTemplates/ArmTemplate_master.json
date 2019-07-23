@@ -1,0 +1,98 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "DFBitlegence"
+		},
+		"csvDataSource_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'csvDataSource'"
+		},
+		"csvDataSource_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "dfastorage"
+		},
+		"FileServerDataSource_Folder1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"FileServerDataSource_Folder1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().FolderPath"
+		},
+		"FileServerDataSource_File1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().filename"
+		},
+		"FileServerDataSource_File1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().path"
+		},
+		"FileServerDataDestination1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@dataset().filename"
+		},
+		"FileServerDataDestination1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@dataset().path"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas Token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"csvDataSource_password": {
+						"value": "[parameters('csvDataSource_password')]"
+					},
+					"csvDataSource_properties_typeProperties_userId": {
+						"value": "[parameters('csvDataSource_properties_typeProperties_userId')]"
+					},
+					"FileServerDataSource_Folder1_properties_typeProperties_fileName": {
+						"value": "[parameters('FileServerDataSource_Folder1_properties_typeProperties_fileName')]"
+					},
+					"FileServerDataSource_Folder1_properties_typeProperties_folderPath": {
+						"value": "[parameters('FileServerDataSource_Folder1_properties_typeProperties_folderPath')]"
+					},
+					"FileServerDataSource_File1_properties_typeProperties_fileName": {
+						"value": "[parameters('FileServerDataSource_File1_properties_typeProperties_fileName')]"
+					},
+					"FileServerDataSource_File1_properties_typeProperties_folderPath": {
+						"value": "[parameters('FileServerDataSource_File1_properties_typeProperties_folderPath')]"
+					},
+					"FileServerDataDestination1_properties_typeProperties_fileName": {
+						"value": "[parameters('FileServerDataDestination1_properties_typeProperties_fileName')]"
+					},
+					"FileServerDataDestination1_properties_typeProperties_folderPath": {
+						"value": "[parameters('FileServerDataDestination1_properties_typeProperties_folderPath')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
